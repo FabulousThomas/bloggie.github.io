@@ -6,14 +6,14 @@
 
     // The path to store the uploaded image
     $target = "C:/xampp/htdocs/bloggie/bloggie.github.io/images/".basename($_FILES['image']['name']);
-    
+
     // Get all submited data from the form
     $title = $_POST['title'];
     $author = $_POST['author'];
     $created_at = $_POST['created_at'];
     $content = $_POST['content'];
     $image = $_FILES['image']['name'];
-    $image_temp =$_FILES['image']['tmp_name'];
+    $image_temp = $_FILES['image']['tmp_name'];
 
     // Insert data into table: "Posts"
     $sql = "INSERT INTO posts (title, author, created_at, content, image) VALUES ('$title', '$author', '$created_at', '$content', '$image')";
@@ -27,12 +27,10 @@
     } else {
       $msg = "There was a problem";
     }
-
  }
 
   $query = "SELECT * FROM posts ORDER BY id DESC";
   $result = mysqli_query($conn, $query);
-  
 
   if(isset($_REQUEST['id'])) {
     $id = $_REQUEST['id'];
@@ -42,7 +40,7 @@
   }
 
   // UPDATE POST QUERY
-if(isset($_REQUEST["update"])) {
+  if(isset($_REQUEST["update"])) {
 
   // The path to store the uploaded image
   $target = "C:/xampp/htdocs/bloggie/bloggie.github.io/images/".basename($_FILES['image']['name']);
@@ -52,7 +50,7 @@ if(isset($_REQUEST["update"])) {
   $created_at = $_POST['created_at'];
   $content = $_POST['content'];
   $image = $_FILES['image']['name'];
-  $image_temp =$_FILES['image']['tmp_name'];
+  $image_temp = $_FILES['image']['tmp_name'];
   
   $sql = "UPDATE posts SET title='$title', author='$author', created_at='$created_at', content='$content', image='$image' WHERE id = $id";
   if(mysqli_query($conn, $sql)) {
@@ -76,6 +74,32 @@ if(isset($_REQUEST['delete'])) {
 
   if($query) {
     echo "<script> alert('Post Deleted successfully') </script>";
+  }
+}
+
+// Insert into Topics table
+if(isset($_REQUEST['add_topic'])) {
+  $topic = $_REQUEST['topic'];
+  $description = $_REQUEST['description'];
+
+  $query = "INSERT INTO topics (topic, description) VALUES ('$topic', '$description')";
+  $result = mysqli_query($conn, $query);
+  if($result) {
+    echo "<script> alert('Topic Added successfully') </script>";
+  }
+}
+
+$sql = "SELECT * FROM topics";
+$topic = mysqli_query($conn, $sql);
+
+// Delete Topics
+if(isset($_REQUEST['delete_topic'])) {
+  $id = $_REQUEST['id'];
+
+  $sql = "DELETE FROM topics WHERE id = $id";
+  $query = mysqli_query($conn, $sql);
+  if($query) {
+    echo "<script> alert('Topic Deleted successfully') </script>";
   }
 }
 

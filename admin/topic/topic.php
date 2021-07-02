@@ -45,21 +45,20 @@
       <div class="table-content">
 
         <h2 class="page-title">Add Topics</h2>
-
-        <form action="topic.php">
+          <form method="POST">
           <div>
             <label for="topic">Topic</label>
-            <input type="text" name="title" class="text-input">
+            <input type="text" name="topic" class="text-input">
           </div>
           <div>
             <label for="description">Description</label>
             <textarea name="description" id="body"></textarea>
           </div>
           <div>
-            <button type="submit" class="btn btn-primary btn-md mt-3">Add Topic</button>
+            <button type="submit" name="add_topic" class="btn btn-primary btn-md mt-3">Add Topic</button>
           </div>
         </form>
-
+        
       </div>
     </div>
 

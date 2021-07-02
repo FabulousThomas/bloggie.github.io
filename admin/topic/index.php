@@ -1,5 +1,5 @@
 <?php
-  include "../bloggie/database/db.php"
+  include "../../database/db.php"
 ?>
 
 <!DOCTYPE html>
@@ -15,6 +15,19 @@
   <!-- Custom Styling -->
   <link rel="stylesheet" href="../../css/style.css">
   <link rel="stylesheet" href="../../css/admin.css">
+
+  <style>
+    input[type=submit] {
+      color: red;
+      background: transparent; 
+      border:none; 
+      cursor: pointer;
+    }
+    
+    input[type=submit]:hover {
+      text-decoration: underline;
+    }
+  </style>
   <title>Admin || Manage Topics</title>
 </head>
 
@@ -51,20 +64,21 @@
           <thead>
             <th>SN</th>
             <th>Topics</th>
+            <th>Description</th>
             <th colspan="2">Action</th>
             <tbody>
-              <tr>
-                <td>1</td>
-                <td>Poetry</td>
-                <td><a href="#" class="edit">Edit</a></td>
-                <td><a href="#" class="delete">Delete</a></td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Life Lessons</td>
-                <td><a href="#" class="edit">Edit</a></td>
-                <td><a href="#" class="delete">Delete</a></td>
-              </tr>
+              <?php foreach($topic as $t) {?>
+                <tr>
+                  <td><?php echo $t['id'];?></td>
+                  <td><?php echo $t['topic'];?></td>
+                  <td><?php echo $t['description'];?></td>
+                  <td><a href="edit.php?id=<?php echo $t['id'];?>" class="edit">Edit</a></td>
+                  <td><form method="post">
+                    <input type="text" name="id" hidden value="<?php echo $t['id'];?>">
+                    <input type="submit" name="delete_topic" value="Delete">
+                  </form></td>
+                </tr>
+              <?php }?>
             </tbody>
           </thead>
         </table>

@@ -75,7 +75,7 @@
               <img name="image" src="images/<?php echo $r['image'];?>" alt="" class="post-image">
             </div>
             <div class="col-md-7 py-3">
-              <h4 class="post-title"><a href="single.php"><?php echo $r['title'];?></a></h4>
+              <h4 class="post-title"><a href="single.php?id=<?php echo $r['id'];?>"><?php echo $r['title'];?></a></h4>
               <i class="fa fa-user"> <?php echo $r['author'];?></i> &nbsp;
               <i class="fa fa-calendar"> <?php echo $r['created_at'];?></i>
               <div id="dash">
@@ -90,26 +90,21 @@
 
         <!-- SIDEBAR -->
         <div class="col-md-4 sidebar">
-          <div class="section search">
+          <!-- <div class="section search">
             <form action="index.php">
               <input type="search" name="search" class="text-input" placeholder="Search...">
             </form>
-          </div>
+          </div> -->
 
           <div class="section topics">
             <h4 class="section-title">Topics</h4>
+          <?php foreach($topic as $t) {?>
             <ul>
-              <li><a href="#">Poems</a></li>
-              <li><a href="#">Quotes</a></li>
-              <li><a href="#">Fictions</a></li>
-              <li><a href="#">Biography</a></li>
-              <li><a href="#">Motivation</a></li>
-              <li><a href="#">Inspiration</a></li>
-              <li><a href="#">Life Lessons</a></li>
+              <li><a href="#"><?php echo $t['topic'];?></a></li>
             </ul>
+          <?php }?>
           </div>
         </div>
-
       </div>
     </div>
   </section>
